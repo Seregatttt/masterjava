@@ -29,6 +29,14 @@ public class MainMatrix2 {
             System.out.println(" ");
         }
 
+        executor.shutdown();
 
+        final int[][] matrixC = MatrixUtil.singleThreadMultiply(matrixA, matrixB);
+        for (int i = 0; i < matrixC.length; i++) {
+            for (int j = 0; j < matrixC.length; j++) {
+                System.out.print(matrixC[i][j]+" ");
+            }
+            System.out.println(" ");
+        }
     }
 }

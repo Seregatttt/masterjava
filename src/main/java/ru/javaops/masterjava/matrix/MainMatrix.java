@@ -53,16 +53,16 @@ public class MainMatrix {
                 break;
             }
 
-//            start = System.currentTimeMillis();
-//            final int[][] concurrentMatrixC = MatrixUtil.concurrentMultiply(matrixA, matrixB, executor);
-//            duration = (System.currentTimeMillis() - start) / 1000.;
-//            out("Concurrent thread time, sec: %.3f", duration);
-//            concurrentThreadSum += duration;
-//
-//            if (!MatrixUtil.compare(matrixC, concurrentMatrixC)) {
-//                System.err.println("Comparison failed");
-//                break;
-//            }
+            start = System.currentTimeMillis();
+            final int[][] concurrentMatrixC = MatrixUtil.concurrentMultiply(matrixA, matrixB, executor);
+            duration = (System.currentTimeMillis() - start) / 1000.;
+            out("Concurrent thread time, sec: %.3f", duration);
+            concurrentThreadSum += duration;
+
+            if (!MatrixUtil.compare(matrixC, concurrentMatrixC)) {
+                System.err.println("Comparison failed");
+                break;
+            }
             count++;
         }
         executor.shutdown();
