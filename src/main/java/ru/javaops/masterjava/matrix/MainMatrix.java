@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
  */
 public class MainMatrix {
     private static final int MATRIX_SIZE = 1000;
-    private static final int THREAD_NUMBER = 10;
+    private static final int THREAD_NUMBER = 100;
 
     private final static ExecutorService executor = Executors.newFixedThreadPool(MainMatrix.THREAD_NUMBER);
 
@@ -20,6 +20,7 @@ public class MainMatrix {
 
         double singleThreadSum = 0.;
         double concurrentThreadSum = 0.;
+        double concurrentInvokeAllThreadSum = 0.;
         double singleThreadSumOpt1 = 0.;
         double singleThreadSumOpt2 = 0.;
         int count = 1;
@@ -63,13 +64,26 @@ public class MainMatrix {
                 System.err.println("Comparison failed");
                 break;
             }
+
+            start = System.currentTimeMillis();
+            final int[][] concurrentInvokeAllMatrixC = MatrixUtil.concurrentMultiplyInvokeAll(matrixA, matrixB, executor);
+            duration = (System.currentTimeMillis() - start) / 1000.;
+            out("concurrentMultiplyInvokeAll time, sec: %.3f", duration);
+            concurrentInvokeAllThreadSum += duration;
+
+            if (!MatrixUtil.compare(matrixC, concurrentInvokeAllMatrixC)) {
+                System.err.println("Comparison concurrentMultiplyInvokeAll failed");
+                break;
+            }
             count++;
         }
         executor.shutdown();
+        System.out.println("--------------   results  ------------------------");
         out("Average single thread time, sec: %.3f", singleThreadSum / 5.);
         out("Average single singleThreadSumOpt1 time, sec: %.3f", singleThreadSumOpt1 / 5.);
         out("Average single singleThreadSumOpt2 time, sec: %.3f", singleThreadSumOpt2 / 5.);
         out("Average concurrent thread time, sec: %.3f", concurrentThreadSum / 5.);
+        out("Average concurrentInvokeAllMatrixC time, sec: %.3f", concurrentInvokeAllThreadSum / 5.);
     }
 
     private static void out(String format, double ms) {

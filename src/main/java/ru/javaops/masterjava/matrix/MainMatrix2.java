@@ -20,7 +20,7 @@ public class MainMatrix2 {
         final int[][] matrixA = new int[][]{{1,2},{3,4}};
         final int[][] matrixB = new int[][]{{4,3},{2,1}};
 
-        final int[][] concurrentMatrixC = MatrixUtil.concurrentMultiply(matrixA, matrixB, executor);
+        final int[][] concurrentMatrixC = MatrixUtil.concurrentMultiplyInvokeAll(matrixA, matrixB, executor);
 
         for (int i = 0; i < concurrentMatrixC.length; i++) {
             for (int j = 0; j < concurrentMatrixC.length; j++) {

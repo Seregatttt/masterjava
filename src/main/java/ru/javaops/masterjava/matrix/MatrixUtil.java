@@ -1,10 +1,9 @@
 package ru.javaops.masterjava.matrix;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import java.util.concurrent.CompletionService;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorCompletionService;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.*;
 
 /**
  * gkislin
@@ -51,6 +50,53 @@ public class MatrixUtil {
 
         for (int i = 0; i < matrixSize; i++) {
             CalcResult res = completionService.take().get();
+            for (int k = 0; k < matrixSize; k++) {
+                C[k][res.columnIdx] = res.col[k];
+            }
+        }
+        return C;
+    }
+
+    public static int[][] concurrentMultiplyInvokeAll(int[][] A, int[][] B, ExecutorService executor) throws InterruptedException, ExecutionException {
+        class CalcResult {
+            private final int columnIdx;
+            private final int[] col;
+
+            private CalcResult(int columnIdx, int[] col) {
+                this.columnIdx = columnIdx;
+                this.col = col;
+            }
+        }
+
+        final int matrixSize = A.length;
+        final int[][] C = new int[matrixSize][matrixSize];
+        List<Callable<CalcResult>> tasks = new ArrayList<>();
+
+        for (int j = 0; j < matrixSize; j++) {
+            final int[] thatColumnB = new int[matrixSize];
+            final int columnB = j;
+            for (int k = 0; k < matrixSize; k++) {
+                thatColumnB[k] = B[k][j];
+            }
+
+            tasks.add(() -> {
+                final int[] thisRowC = new int[matrixSize];
+                for (int i = 0; i < matrixSize; i++) {
+                    int[] thisRow = A[i];
+                    int summand = 0;
+
+                    for (int k = 0; k < matrixSize; k++) {
+                        summand += thisRow[k] * thatColumnB[k];
+                    }
+                    thisRowC[i] = summand;
+                }
+                return new CalcResult(columnB, thisRowC);
+            });
+        }
+        List<Future<CalcResult>> futures = executor.invokeAll(tasks);
+
+        for (Future<CalcResult> future : futures) {
+            CalcResult res = future.get();
             for (int k = 0; k < matrixSize; k++) {
                 C[k][res.columnIdx] = res.col[k];
             }
