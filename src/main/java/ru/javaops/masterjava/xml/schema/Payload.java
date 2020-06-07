@@ -62,6 +62,9 @@ public class Payload {
     @XmlElement(name = "Users", namespace = "http://javaops.ru", required = true)
     protected Payload.Users users;
 
+    @XmlElement(name = "Projects", namespace = "http://javaops.ru", required = true)
+    protected Payload.Projects projects;
+
     /**
      * Gets the value of the cities property.
      * 
@@ -98,16 +101,17 @@ public class Payload {
         return users;
     }
 
-    /**
-     * Sets the value of the users property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Payload.Users }
-     *     
-     */
     public void setUsers(Payload.Users value) {
         this.users = value;
+    }
+
+
+    public Payload.Projects getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Payload.Projects value) {
+        this.projects = value;
     }
 
 
@@ -199,35 +203,28 @@ public class Payload {
         @XmlElement(name = "User", namespace = "http://javaops.ru")
         protected List<User> user;
 
-        /**
-         * Gets the value of the user property.
-         * 
-         * <p>
-         * This accessor method returns a reference to the live list,
-         * not a snapshot. Therefore any modification you make to the
-         * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the user property.
-         * 
-         * <p>
-         * For example, to add a new item, do as follows:
-         * <pre>
-         *    getUser().add(newItem);
-         * </pre>
-         * 
-         * 
-         * <p>
-         * Objects of the following type(s) are allowed in the list
-         * {@link User }
-         * 
-         * 
-         */
         public List<User> getUser() {
             if (user == null) {
                 user = new ArrayList<User>();
             }
             return this.user;
         }
-
     }
 
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+            "project"
+    })
+    public static class Projects {
+
+        @XmlElement(name = "Project", namespace = "http://javaops.ru")
+        protected List<Project> project;
+
+        public List<Project> getProject() {
+            if (project == null) {
+                project = new ArrayList<Project>();
+            }
+            return this.project;
+        }
+    }
 }

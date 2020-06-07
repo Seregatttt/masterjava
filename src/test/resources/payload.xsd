@@ -21,7 +21,23 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
+                <xs:element name="Projects">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                            <xs:element ref="Project"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
             </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Project">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:string" name="nameProject"/>
+                <xs:element type="xs:string" name="description"/>
+            </xs:sequence>
         </xs:complexType>
     </xs:element>
 

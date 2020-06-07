@@ -49,6 +49,10 @@ public class ObjectFactory {
         return new User();
     }
 
+    public Project createProject() {
+        return new Project();
+    }
+
     /**
      * Create an instance of {@link Payload.Cities }
      * 
@@ -63,6 +67,10 @@ public class ObjectFactory {
      */
     public Payload.Users createPayloadUsers() {
         return new Payload.Users();
+    }
+
+    public Payload.Projects createPayloadProjects() {
+        return new Payload.Projects();
     }
 
     /**
