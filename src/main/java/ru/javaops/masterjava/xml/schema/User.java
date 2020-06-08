@@ -43,7 +43,7 @@ import java.util.List;
 @XmlRootElement(name = "User", namespace = "http://javaops.ru")
 public class User {
 
-    @XmlElement(namespace = "http://javaops.ru", required = true)
+    @XmlAttribute(name = "email", required = true)
     protected String email;
 
     @XmlElement(namespace = "http://javaops.ru", required = true)
