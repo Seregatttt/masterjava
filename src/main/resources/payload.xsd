@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://javaops.ru"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://javaops.ru"
+           elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+    <xs:element name="Payload">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="Cities">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                            <xs:element ref="City"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Users">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                            <xs:element ref="User"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Groups">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                            <xs:element ref="Group"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Projects">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                            <xs:element ref="Project"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="User">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute type="flagType" name="flag" use="required"/>
+                    <xs:attribute type="xs:string" name="email" use="required"/>
+                    <xs:attribute type="xs:IDREF" name="city" use="required"/>
+                    <xs:attribute type="xs:IDREFS" name="group" use="optional"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="flagType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="active"/>
+            <xs:enumeration value="deleted"/>
+            <xs:enumeration value="superuser"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="City" type="cityType"/>
+
+    <xs:complexType name="cityType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute type="xs:ID" name="id" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:element name="Group" type="groupType"/>
+    <xs:complexType name="groupType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute type="xs:ID" name="id" use="required"/>
+                <!--            <xs:attribute type="groupType" name="groupType" use="required"/>-->
+                <xs:attribute type="xs:IDREF" name="project" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:element name="Project">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:string" name="nameProject"/>
+                <xs:element type="xs:string" name="description"/>
+            </xs:sequence>
+            <xs:attribute type="xs:ID" name="id" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+
+    <!--    <xs:simpleType name="groupType">-->
+    <!--        <xs:restriction base="xs:string">-->
+    <!--            <xs:enumeration value="registering"/>-->
+    <!--            <xs:enumeration value="current"/>-->
+    <!--            <xs:enumeration value="finished"/>-->
+    <!--        </xs:restriction>-->
+    <!--    </xs:simpleType>-->
+
+
+</xs:schema>

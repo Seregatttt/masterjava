@@ -84,11 +84,11 @@ public class Payload {
     })
     public static class Groups {
         @XmlElement(name = "Group", namespace = "http://javaops.ru")
-        protected List<GroupType> group;
+        protected List<Group> group;
 
-        public List<GroupType> getGroup() {
+        public List<Group> getGroup() {
             if (group == null) {
-                group = new ArrayList<GroupType>();
+                group = new ArrayList<Group>();
             }
             return this.group;
         }

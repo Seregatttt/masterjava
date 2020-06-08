@@ -1,14 +1,7 @@
 
 package ru.javaops.masterjava.xml.schema;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,11 +36,11 @@ import java.util.List;
 @XmlRootElement(name = "User", namespace = "http://javaops.ru")
 public class User {
 
+    @XmlValue
+    protected String fullName;
+
     @XmlAttribute(name = "email", required = true)
     protected String email;
-
-    @XmlElement(namespace = "http://javaops.ru", required = true)
-    protected String fullName;
 
     @XmlAttribute(name = "flag", required = true)
     protected FlagType flag;
@@ -60,7 +53,7 @@ public class User {
     @XmlAttribute(name = "group", required = true)
     @XmlIDREF
     @XmlSchemaType(name = "IDREFS")
-    protected List<Object> group;
+    protected List<Group> group;
 
 
 
@@ -160,15 +153,22 @@ public class User {
         this.city = value;
     }
 
-    public List<Object> getGroupRefs() {
+    public List<Group> getGroup() {
         if (group == null) {
-            group = new ArrayList<Object>();
+            group = new ArrayList<Group>();
         }
         return this.group;
     }
 
-    public void setGroup(List<Object> value) {
+    public void setGroup(List<Group> value) {
         this.group = value;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

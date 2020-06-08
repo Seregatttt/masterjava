@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlType(name = "groupType", namespace = "http://javaops.ru", propOrder = {
         "valueGroup"
 })
-public class GroupType {
+public class Group {
 
     @XmlValue
     protected String valueGroup;
@@ -23,7 +23,7 @@ public class GroupType {
     @XmlAttribute(name = "project", required = true)
     @XmlIDREF
     @XmlSchemaType(name = "IDREF")
-    protected Object project;
+    protected Project project;
 
     public String getValueGroup() {
         return valueGroup;
@@ -41,11 +41,11 @@ public class GroupType {
         this.id = value;
     }
 
-    public Object getProject() {
+    public Project getProject() {
         return project;
     }
 
-    public void setProject(Object value) {
+    public void setProject(Project value) {
         this.project = value;
     }
 }

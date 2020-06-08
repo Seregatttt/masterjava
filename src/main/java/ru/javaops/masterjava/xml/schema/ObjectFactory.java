@@ -88,7 +88,7 @@ public class ObjectFactory {
         return new CityType();
     }
 
-    public GroupType createGroupType() {return new GroupType(); }
+    public Group createGroupType() {return new Group(); }
 
 
     /**
