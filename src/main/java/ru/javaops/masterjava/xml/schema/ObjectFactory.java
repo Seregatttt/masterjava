@@ -25,9 +25,11 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _City_QNAME = new QName("http://javaops.ru", "City");
+    private final static QName _Project_QNAME = new QName("http://javaops.ru", "Project");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ru.javaops.masterjava.xml.schema
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package:
+     * ru.javaops.masterjava.xml.schema
      * 
      */
     public ObjectFactory() {
@@ -61,6 +63,10 @@ public class ObjectFactory {
         return new Payload.Cities();
     }
 
+    public Payload.Groups createPayloadGroups() {
+        return new Payload.Groups();
+    }
+
     /**
      * Create an instance of {@link Payload.Users }
      * 
@@ -73,6 +79,7 @@ public class ObjectFactory {
         return new Payload.Projects();
     }
 
+
     /**
      * Create an instance of {@link CityType }
      * 
@@ -80,6 +87,9 @@ public class ObjectFactory {
     public CityType createCityType() {
         return new CityType();
     }
+
+    public GroupType createGroupType() {return new GroupType(); }
+
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CityType }{@code >}}
@@ -89,5 +99,15 @@ public class ObjectFactory {
     public JAXBElement<CityType> createCity(CityType value) {
         return new JAXBElement<CityType>(_City_QNAME, CityType.class, null, value);
     }
+
+//    @XmlElementDecl(namespace = "http://javaops.ru", name = "Group")
+//    public JAXBElement<GroupType> createCity(GroupType value) {
+//        return new JAXBElement<GroupType>(_City_QNAME, GroupType.class, null, value);
+//    }
+
+   /* @XmlElementDecl(namespace = "http://javaops.ru", name = "Project")
+    public JAXBElement<Project> createProject(Project value) {
+        return new JAXBElement<Project>(_Project_QNAME, Project.class, null, value);
+    }*/
 
 }

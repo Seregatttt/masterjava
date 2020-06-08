@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -43,14 +45,24 @@ public class User {
 
     @XmlElement(namespace = "http://javaops.ru", required = true)
     protected String email;
+
     @XmlElement(namespace = "http://javaops.ru", required = true)
     protected String fullName;
+
     @XmlAttribute(name = "flag", required = true)
     protected FlagType flag;
+
     @XmlAttribute(name = "city", required = true)
     @XmlIDREF
     @XmlSchemaType(name = "IDREF")
     protected Object city;
+
+    @XmlAttribute(name = "group", required = true)
+    @XmlIDREF
+    @XmlSchemaType(name = "IDREFS")
+    protected List<Object> group;
+
+
 
     /**
      * Gets the value of the email property.
@@ -146,6 +158,17 @@ public class User {
      */
     public void setCity(Object value) {
         this.city = value;
+    }
+
+    public List<Object> getGroupRefs() {
+        if (group == null) {
+            group = new ArrayList<Object>();
+        }
+        return this.group;
+    }
+
+    public void setGroup(List<Object> value) {
+        this.group = value;
     }
 
 }

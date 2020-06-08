@@ -2,36 +2,37 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://javaops.ru payload.xsd">
     <Users>
-        <User flag="active" city="kiv">
+        <User flag="active" city="kiv" group="topjava01">
             <email>gmail@gmail.com</email>
             <fullName>Full Name</fullName>
         </User>
-        <User flag="superuser" city="spb">
+        <User flag="superuser" city="spb" group="topjava01 topjava02 masterjava01">
             <email>admin@javaops.ru</email>
             <fullName>Admin</fullName>
         </User>
-        <User flag="deleted" city="spb">
+        <User flag="deleted" city="spb" group="topjava02">
             <email>mail@yandex.ru</email>
             <fullName>Deleted</fullName>
         </User>
     </Users>
     <Cities>
-        <City id="spb">Санкт-Петербург</City>
+        <City id="spb">   Санкт-Петербург    </City>
         <City id="kiv">Киев</City>
         <City id="mnsk">Минск</City>
     </Cities>
-    <Projects>
-        <Project>
-            <nameProject>topjava</nameProject>
-            <description>super</description>
-        </Project>
-        <Project>
-            <nameProject>masterjava</nameProject>
-            <description></description>
-        </Project>
-        <Project>
-            <nameProject>ssss</nameProject>
-            <description>tttttt</description>
-        </Project>
-    </Projects>
+    <Groups>
+        <Group id="topjava01" project="topjava">topjava01</Group>
+        <Group id="topjava02" project="topjava">topjava02</Group>
+        <Group id="masterjava01" project="masterjava">masterjava01</Group>
+    </Groups>
+        <Projects>
+            <Project id="topjava">
+                <nameProject>top-java</nameProject>
+                <description>super</description>
+            </Project>
+            <Project id="masterjava">
+                <nameProject>master-java</nameProject>
+                <description>pu-per-1</description>
+            </Project>
+        </Projects>
 </Payload>

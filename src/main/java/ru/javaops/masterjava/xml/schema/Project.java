@@ -2,6 +2,8 @@
 package ru.javaops.masterjava.xml.schema;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -34,69 +36,39 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement(name = "Project", namespace = "http://javaops.ru")
 public class Project {
 
+    @XmlAttribute(name = "id", required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    @XmlID
+    @XmlSchemaType(name = "ID")
+    protected String id;
+
     @XmlElement(namespace = "http://javaops.ru", required = true)
     protected String nameProject;
+
     @XmlElement(namespace = "http://javaops.ru", required = true)
     protected String description;
 
-
-    /**
-     * Gets the value of the email property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
     public String getNameProject() {
         return nameProject;
     }
 
-    /**
-     * Sets the value of the email property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
     public void setNameProject(String value) {
         this.nameProject = value;
     }
 
-    /**
-     * Gets the value of the fullName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
     public String getDescription() {
         return description;
     }
 
-    /**
-     * Sets the value of the fullName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
     public void setDescription(String value) {
         this.description = value;
     }
 
-    /**
-     * Gets the value of the flag property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link FlagType }
-     *     
-     */
+    public String getId() {
+        return id;
+    }
 
-
-
+    public void setId(String value) {
+        this.id = value;
+    }
 }
